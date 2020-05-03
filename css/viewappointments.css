@@ -1,0 +1,212 @@
+.viewappointments_body{
+    height:485px;
+}
+
+.viewappointments_body h1{
+  text-align: center;
+}
+
+
+.viewappointments_tab{
+  padding-top:10px;
+  margin-left:0px;
+  height:60px;
+  float:left;
+  width:98%;
+  border-radius:10px;
+  margin-top:-10px;
+}
+
+.viewappointments_tablinks{
+  height:50px;
+  width:190px;
+  border: none;
+  outline: none;
+  text-align:center;
+  cursor:pointer;
+  background-color:rgb(31, 138, 210);
+  color:white;
+  font-size: large;
+  font-weight: bold;
+  border-radius:10px;
+  margin-left:20px;
+  transition: 0.3s;
+}
+
+.viewappointments_tablinks.active{
+  background-color:rgb(16, 96, 150);
+}
+
+.viewappointments_tab button:hover{
+  background-color:rgb(5, 90, 146);
+}
+
+.viewappointments_tabcontent{
+  text-align: center;
+  overflow-y:scroll;
+  height: 313px;
+  min-height: 50px;
+  margin-top:10px;
+  float:left;
+  display:none;
+  width:98%;
+  border-radius:10px;
+  padding-top:15px;
+}
+
+.viewstatus_tablinks{
+  height:50px;
+  width:190px;
+  border: none;
+  outline: none;
+  text-align:center;
+  cursor:pointer;
+  background-color:rgb(31, 138, 210);
+  color:white;
+  font-size: large;
+  font-weight: bold;
+  border-radius:10px;
+  margin-left:20px;
+  transition: 0.3s;
+}
+
+.viewstatus_tablinks.active{
+  background-color:rgb(16, 96, 150);
+}
+
+.viewstatus_tab button:hover{
+  background-color:rgb(5, 90, 146);
+}
+
+.viewstatus_tabcontent{
+  margin-left:5px;
+  text-align: center;
+  overflow-y:scroll;
+  height: 245px;
+  min-height: 50px;
+  margin-top:0px;
+  float:left;
+  display:none;
+  width:99%;
+  padding-top:15px;
+}
+
+.searchbar{
+  border-radius:5px;
+  width:50%;
+  height:40px;
+  background: #f1f1f1;
+  border: none;
+  padding-left: 15px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  outline: none;
+  font-size: large;
+}
+
+.searchbutton{
+  height:40px;
+  width:140px;
+  border: none;
+  outline: none;
+  text-align:center;
+  cursor:pointer;
+  background-color:rgb(31, 138, 210);
+  color:white;
+  font-size: large;
+  font-weight: bold;
+  border-radius:5px;
+  margin-left:-5px;
+  transition: 0.3s;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.searchbutton:hover{
+  background-color:rgb(5, 90, 146);
+}
+
+.appointment_search_result{
+   margin-left:5px;
+  text-align: center;
+  height: 245px;
+  min-height: 50px;
+  margin-top:0px;
+  float:left;
+  width:99%;
+  padding-top:15px;
+}
+
+
+.noappointment{
+  text-align: center;
+  margin-top:10px;
+  font-size: larger;
+}
+
+.set_appointment_label{
+  font-size:larger;
+}
+
+.set_appointment_input{
+  background-color: rgb(124, 195, 243);
+  color:white;
+  font-size: large;
+  font-weight: bold;
+  width:95%;
+  padding: 10px;
+  margin: 5px 0 12px 0;
+  display: inline-block;
+  border: none;
+  border-radius:10px;  
+}
+.set_appointment_submit{
+  background-color: rgb(124, 195, 243);
+    color:white;
+    font-size: large;
+    font-weight: bold;
+    width:95%;
+    padding: 10px;
+    margin: 5px 0 12px 0;
+    display: inline-block;
+    border: none;
+    border-radius:10px;
+    cursor: pointer;
+}
+  
+
+/* width */
+.viewappointments_tabcontent::-webkit-scrollbar {
+  width: 5px;
+  background-color:white;
+}
+   
+/* Track */
+.viewappointments_tabcontent::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+    
+/* Handle */
+.viewappointments_tabcontent::-webkit-scrollbar-thumb {
+  background: rgb(31, 138, 210);
+  border-radius: 10px;
+}
+
+
+.viewstatus_tabcontent::-webkit-scrollbar {
+  width: 5px;
+  background-color:white;
+}
+   
+/* Track */
+.viewstatus_tabcontent::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+    
+/* Handle */
+.viewstatus_tabcontent::-webkit-scrollbar-thumb {
+  background: rgb(31, 138, 210);
+  border-radius: 10px;
+}

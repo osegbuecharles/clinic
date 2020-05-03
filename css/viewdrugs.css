@@ -1,0 +1,133 @@
+.viewdrugs_body{
+    height:485px;
+}
+
+.viewdrugs_body h1{
+  text-align: center;
+}
+
+.viewdrugs_tab{
+    padding-top:10px;
+    margin-left:0px;
+    height:60px;
+    float:left;
+    width:98%;
+    border-radius:10px;
+    margin-top:-10px;
+}
+
+.viewdrugs_tablinks{
+    height:50px;
+    width:150px;
+    border: none;
+    outline: none;
+    text-align:center;
+    cursor:pointer;
+    background-color:rgb(31, 138, 210);
+    color:white;
+    font-size: large;
+    font-weight: bold;
+    border-radius:10px;
+    margin-left:20px;
+    transition: 0.3s;
+}
+
+.viewdrugs_tablinks.active{
+    background-color:rgb(16, 96, 150);
+}
+
+.viewdrugs_tab button:hover{
+    background-color:rgb(5, 90, 146);
+}
+
+.viewdrugs_tabcontent{
+    text-align: center;
+    overflow-y:scroll;
+    height: 313px;
+    margin-top:10px;
+    float:left;
+    display:none;
+    width:98%;
+    border-radius:10px;
+    padding-top:15px;
+}
+
+.nodrugs{
+    text-align: center;
+    margin-top:10px;
+    font-size: larger;
+}
+
+.viewdrugs_table{
+    margin-left:20px;
+}
+
+.clickable{
+    cursor:pointer;
+    color:rgb(31, 138, 210);
+}
+
+.clickable:hover{
+    color:red;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(143, 201, 240);
+}
+
+.table_heading{
+    background-color:rgb(31, 138, 210);
+    color:white;
+}
+
+td{
+    vertical-align:center;
+    text-align:center;
+    padding:5px 5px;
+}
+
+.message_div{
+    padding-top:10px;
+    padding-left:20%;
+    text-align: justify;
+    border:solid rgb(31, 138, 210) thin;
+    border-radius:10px;
+    font-size: larger;
+    min-height:120px;
+}
+
+.drug_data_label{
+    font-weight:bold;
+}
+
+.drug_data_heading{
+    font-size: larger;
+    font-weight:bold;
+    margin-left: 100px;
+}
+
+
+.drug_function, .scalable{
+    max-width:97%;
+    height:auto;
+}
+
+
+
+/* width */
+.viewdrugs_tabcontent::-webkit-scrollbar {
+    width: 5px;
+    background-color:white;
+}
+     
+/* Track */
+.viewdrugs_tabcontent::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white;
+    border-radius: 10px;
+}
+      
+/* Handle */
+.viewdrugs_tabcontent::-webkit-scrollbar-thumb {
+    background: rgb(31, 138, 210);
+    border-radius: 10px;
+}

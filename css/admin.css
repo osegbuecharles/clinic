@@ -1,0 +1,185 @@
+
+.admin_body{
+    display:none;
+}
+
+.user_link a{
+    color:inherit;
+    text-decoration: none;
+    font-family:font8;
+    font-size: large;
+}
+
+.sm{
+    display:none;
+}
+
+.user_link a:hover{
+    color:rgb(241, 202, 30)
+}
+
+.user_link{
+    height:48px;
+    color:white;
+    font-weight: bold;
+    background-color: rgb(130, 60, 0);
+    border-radius:5px;
+    position: absolute;
+    right:0px;
+    top:0px;
+    margin-top:87px;    
+    margin-right:10px;
+    border:none;
+}
+
+/* Styling the message section*/
+
+.message{
+    margin-left:-8px;
+    top:0px;
+    position:absolute;
+    width:100%;
+    height: 100%;
+    background-color:black;
+    opacity:0.8;
+    z-index:1;
+    display:none;
+    cursor: crosshair;
+}
+
+.message_in{
+    display:none;
+    border-radius:5px;
+    position: absolute;
+    z-index:2;
+    background-color:white;
+    opacity: 1;
+    width:50%;
+    margin-left:30%;
+    min-height:170px;
+    top:0px;
+    margin-top:200px;
+}
+
+.message_text{
+    font-size:xx-large;
+    font-weight: bold;
+    margin-left:20%;
+}
+
+.message_div{
+    padding-top:10px;
+    text-align: justify;
+    border:solid rgb(31, 138, 210) thin;
+    border-radius:10px;
+    font-size: larger;
+    min-height:120px;
+    overflow-y: scroll;
+}
+
+.message_close{
+    margin-left:40%;
+    width:20%;
+    height:50px;
+    color:white;
+    font-weight: bold;;
+    border-radius:5px;
+    background-color:rgb(244, 67, 54);
+}
+
+.message_close:hover{
+    background-color:rgb(243, 46, 32);
+    cursor:pointer;
+}
+
+.message_continue{
+    margin-left:40%;
+    width:20%;
+    height:50px;
+    color:white;
+    font-weight: bold;;
+    border-radius:5px;
+    background-color: #4CAF50;
+}
+
+.message_continue:hover{
+    background-color:rgb(112, 191, 115);
+    cursor:pointer;
+}
+
+.tab{
+    margin-left:-10px;
+    float:left;
+    width:15%;
+    height:483px;
+    border-right:solid #c7c6c6 thin;
+    background-color:rgb(31, 138, 210);
+}
+
+.tablinks{
+    width:100%;
+    height:80px;
+    cursor:pointer;
+    border:none;
+    background-color:rgb(31, 138, 210);
+    color:white;
+    font-size: large;
+    font-weight: bold;
+    border-bottom:solid rgb(83, 154, 201)
+}
+
+.tablinks.active{
+    background-color:rgb(21, 105, 161);
+}
+
+.tab button:hover{
+    background-color:rgb(5, 90, 146);
+}
+
+.tabcontent{
+    float:left;
+    display:none;
+    padding-left:10px;
+    width:84.5%;
+    height:480px;
+}
+
+.box_shadow{
+    box-shadow: 2px 2px 5px rgb(31, 138, 210), -3px -3px 6px rgb(62, 140, 192);
+}
+
+
+.scroll_div{
+    overflow-y:scroll;
+}
+
+/* width */
+.scroll_div::-webkit-scrollbar {
+    width: 5px;
+    background-color:white;
+}
+     
+/* Track */
+.scroll_div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white;
+    border-radius: 10px;
+}
+      
+/* Handle */
+.scroll_div::-webkit-scrollbar-thumb {
+    background: rgb(31, 138, 210);
+    border-radius: 10px;
+}
+
+
+@media screen and (max-width:750px){
+    .sm{
+        display:block;
+    }
+    .sm button i{
+        font-size:large;
+    }
+    .md{
+        display:none;
+    }
+}

@@ -1,0 +1,93 @@
+.viewinventory_body{
+    height:485px;
+}
+
+.viewinventory_body h1{
+    text-align:center
+}
+
+.viewinventory_tab{
+    padding-top:10px;
+    margin-left:0px;
+    height:60px;
+    float:left;
+    width:98%;
+    border-radius:10px;
+    margin-top:-10px;
+}
+
+.viewinventory_tablinks{
+    height:50px;
+    width:200px;
+    border: none;
+    outline: none;
+    text-align:center;
+    cursor:pointer;
+    background-color:rgb(31, 138, 210);
+    color:white;
+    font-size: large;
+    font-weight: bold;
+    border-radius:10px;
+    margin-left:20px;
+    transition: 0.3s;
+}
+
+.viewinventory_tablinks.active{
+    background-color:rgb(16, 96, 150);
+}
+
+.viewinventory_tab button:hover{
+    background-color:rgb(5, 90, 146);
+}
+
+.viewinventory_tabcontent{
+    text-align: center;
+    overflow-y:scroll;
+    height: 313px;
+    margin-top:10px;
+    float:left;
+    display:none;
+    width:98%;
+    border-radius:10px;
+    padding-top:15px;
+}
+
+.inventory_search_result{
+    margin-left:5px;
+    text-align: center;
+    height: 245px;
+    min-height: 50px;
+    margin-top:0px;
+    float:left;
+    width:99%;
+    padding-top:15px;
+}
+
+.controllers{
+    font-size:large;
+    padding-left:5px;
+    padding-right:5px;
+    color:white;
+    border-radius:7px;
+    background-color: rgb(31, 138, 210);
+}
+
+
+
+/* width */
+.viewinventory_tabcontent::-webkit-scrollbar {
+    width: 5px;
+    background-color:white;
+}
+     
+/* Track */
+.viewinventory_tabcontent::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white;
+    border-radius: 10px;
+}
+      
+/* Handle */
+.viewinventory_tabcontent::-webkit-scrollbar-thumb {
+    background: rgb(31, 138, 210);
+    border-radius: 10px;
+}

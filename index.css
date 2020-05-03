@@ -1,0 +1,30 @@
+body{
+    overflow-y:hidden;
+    background-image:url("assets/gallery/background3.jpg");
+    background-size: 100%;
+}
+
+.welcome{
+    margin-left:1.4%;
+    display:none;
+    position:absolute;
+    width:96%;
+    height:30%;
+    margin-top:15%;
+    border-radius:3px;
+    box-shadow: 2px 2px 15px -7px black;
+    text-align: center;
+    background-color:rgb(165, 178, 219, 0.4);
+}
+
+.text{
+    display:none;
+    margin-top:4%;
+    font-family:font3;
+    font-size:22px;
+}
+
+.redirect{
+    margin-top:1%;
+    display:none;
+}

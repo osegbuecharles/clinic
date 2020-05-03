@@ -1,0 +1,183 @@
+.viewpatients_body{
+    height:485px;
+}
+
+.viewpatients_body h1{
+    text-align:center
+}
+
+.viewpatients_tab{
+    padding-top:10px;
+    margin-left:0px;
+    height:60px;
+    float:left;
+    width:98%;
+    border-radius:10px;
+    margin-top:-10px;
+}
+
+.viewpatients_tablinks{
+    height:50px;
+    width:150px;
+    border: none;
+    outline: none;
+    text-align:center;
+    cursor:pointer;
+    background-color:rgb(31, 138, 210);
+    color:white;
+    font-size: large;
+    font-weight: bold;
+    border-radius:10px;
+    margin-left:20px;
+    transition: 0.3s;
+}
+
+.viewpatients_tablinks.active{
+    background-color:rgb(16, 96, 150);
+}
+
+.viewpatients_tab button:hover{
+    background-color:rgb(5, 90, 146);
+}
+
+.viewpatients_tabcontent{
+    text-align: center;
+    overflow-y:scroll;
+    height: 313px;
+    margin-top:10px;
+    float:left;
+    display:none;
+    width:98%;
+    border-radius:10px;
+    padding-top:15px;
+}
+
+.viewrecords_tab{
+    padding-top:10px;
+    margin-left:15px;
+    height:60px;
+    float:left;
+    width:98%;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.viewrecords_tablinks{
+    height:50px;
+    width:150px;
+    border: none;
+    outline: none;
+    text-align:center;
+    cursor:pointer;
+    background-color:rgb(31, 138, 210);
+    color:white;
+    font-size: large;
+    font-weight: bold;
+    border-radius:10px;
+    margin-left:20px;
+    transition: 0.3s;
+}
+
+.viewrecords_tablinks.active{
+    background-color:rgb(16, 96, 150);
+}
+
+.viewrecords_tab button:hover{
+    background-color:rgb(5, 90, 146);
+}
+
+.viewrecords_tabcontent{
+    text-align: center;
+    overflow-y:scroll;
+    height: 400px;
+    margin-top:10px;
+    float:left;
+    display:none;
+    width:98%;
+    border-radius:10px;
+    padding-top:15px;
+    margin-left:15px;
+}
+
+.patient_search_result{
+    margin-left:5px;
+    text-align: center;
+    height: 245px;
+    min-height: 50px;
+    margin-top:0px;
+    float:left;
+    width:99%;
+    padding-top:15px;
+}
+
+.apimg{
+    width:50px;
+    height:50px;
+    border-radius:5px;
+}
+
+.viewdp{
+    width:100%;
+    height:550px;
+    background-color:rgb(31, 138, 210);
+    border-radius:10px;
+}
+
+.successful{
+    color:green;
+    background-color: white;
+    width:50%;
+    padding-top:50px;
+    padding-bottom:50px;
+    border-radius:10px;
+    font-size: xx-large;
+    font-weight: bold;
+    position: absolute;
+    z-index:4;
+    margin-top:50px;
+    margin-left:25%;
+    display:none;
+}
+
+.pagination, .paginationstyle {
+    display: inline-block;
+    padding-bottom:10px;
+  }
+  
+  .pagination a, .paginationstyle a {
+    cursor:pointer;
+    color: white;
+    background-color: rgb(31, 138, 210);
+    float: left;
+    margin-left:8px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .pagination a.active, .paginationstyle a.active {
+  background-color: rgb(21, 105, 161);
+  border-radius: 5px;
+  color: white;
+}
+
+.pagination a:hover:not(.active),.paginationstyle a:hover:not(.active)  {background-color: rgb(5, 90, 146);}
+
+
+/* width */
+.viewpatients_tabcontent::-webkit-scrollbar {
+    width: 5px;
+    background-color:white;
+}
+     
+/* Track */
+.viewpatients_tabcontent::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white;
+    border-radius: 10px;
+}
+      
+/* Handle */
+.viewpatients_tabcontent::-webkit-scrollbar-thumb {
+    background: rgb(31, 138, 210);
+    border-radius: 10px;
+}

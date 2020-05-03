@@ -1,0 +1,99 @@
+.viewclinicdata_body{
+    height:485px;
+}
+
+.viewclinicdata_body h1{
+    text-align: center;
+}
+
+.noclinicdata{
+    display:none;
+    border: solid thin rgb(31, 138, 210);
+    border-radius: 10px;
+    min-height: 50px;
+}
+
+.noclinicdata p{
+    font-size:x-large;
+    font-weight: bold;
+    text-align: center;
+    color:red;
+}
+
+.warning{
+    color:red;
+}
+
+
+.clinicdata{
+    height:423px;
+    display:none;
+    overflow-y:scroll;
+    text-transform: capitalize;
+    border-radius: 10px;
+    padding-left:10px;
+    width:98%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.clinic_dataitem{
+    margin-top:20px;
+    font-size: larger;
+}
+
+.bmi_data{
+    font-weight:bold;
+}
+
+.slidecontainer {
+    width: 94%; /* Width of the outside container */
+  }
+  
+  .bmi_range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;  
+    background:-webkit-linear-gradient(left, rgb(13, 163, 223) 8%, lime 38%, yellow 39%, orangered 80%, red 100%);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .bmi_range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: white;
+  }
+  
+  .bmi_range::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+  
+
+/* width */
+.clinicdata::-webkit-scrollbar {
+    width: 5px;
+    background-color:white;
+}
+     
+/* Track */
+.clinicdata::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white;
+    border-radius: 10px;
+}
+      
+/* Handle */
+.clinicdata::-webkit-scrollbar-thumb {
+    background: rgb(31, 138, 210);
+    border-radius: 10px;
+}

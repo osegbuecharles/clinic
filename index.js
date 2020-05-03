@@ -1,0 +1,10 @@
+$(document).ready(function(){
+    sessionStorage.setItem("darkmode","off");
+    $(".welcome").fadeIn(1000,function(){
+        $(".text").slideDown(1000,function(){
+            $(".redirect").fadeIn(2500,function(){
+               window.location.replace("home");
+            });
+        });
+    });
+});
