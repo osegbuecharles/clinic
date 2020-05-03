@@ -27,12 +27,12 @@
 </body>-->
 
 <div id="head">
-    <a href="../home"><img src="../assets/Name.png"/></a>
+    <a href="../home"><img src="../assets/NAME.png"/></a>
 </div>
 
 <nav class="navbar navbar-expand-sm justify-content-center navbar-dark sticky-top w-100" style="background-color: rgb(130, 60, 0);z-index:1">
     <!-- Brand -->
-    <a class="navbar-brand" data-toggle="tooltip" data-placement="top" title="Augustinee University Ilara">AUI</a>
+    <a class="navbar-brand" data-toggle="tooltip" data-placement="top" title="Augustine University Ilara">AUI</a>
   
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
