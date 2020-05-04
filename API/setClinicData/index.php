@@ -36,7 +36,7 @@
                                 echo json_encode(array("error"=>FALSE,"data"=>array("success"=>TRUE)));
                             }
                             else{
-                                echo json_encode(array("error"=>TRUE,"message"=>"This user does not exist"));
+                                echo json_encode(array("error"=>TRUE,"message"=>"Clinic Data already exists"));
                             }
                         }
                         else{

@@ -357,160 +357,134 @@ async function submitAddInventory(){
   quantity=$("#inventoryquantity_input").val();
   unit=$("#inventoryunit_input").val();
   functio=$("#inventoryfunction_input").val();
+
   data= await addInventory(name,functio,type,quantity,unit);
-  if(data["error"]==true){
-    $(window).scrollTop(0);
-    $(".message").show(function(){
-        $(".message_in").fadeIn(function(){
-            $(".message_in").html(`
-                <p class="message_text">
-                    `+data["message"]+`
-                </p>
-                <button class="message_close">Try Again</button>
-            `);
-            $(".message_close").click(async function(){
-                $(".message_in").fadeOut(function(){
-                    $(".message").hide();
-                    $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
-                });
-            });
+
+  $(data).ready(function(){
+    $(".spinner-border").fadeOut(function(){
+      if(data["error"]==true){
+        $(".modal-body").html(`
+          <p>
+            `+data["message"]+`
+          </p>
+        `);
+        $(".modal-footer").html(`
+          <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+        `);
+      }
+      else if(data["error"]==false){
+        $(".modal-body").html(`
+          <h2 class="text-successful">
+            Upload Successful
+          </h2>
+        `);
+        $(".modal-footer").html(`
+          <button type="button" class="btn btn-block btn-success closee" data-dismiss="modal">Continue</button>
+        `);
+        $(".closee").click(function(){
+          loadAllInventory(psize,pnum);
         });
-    });
-  }
-  else if(data["error"]==false){
-    $(window).scrollTop(0);
-    $(".message").show(function(){
-        $(".message_in").fadeIn(function(){
-            $(".message_in").html(`
-                <p class="message_text" style="margin-left:35%;">
-                    Upload Successful!!
-                </p>
-                <button class="message_close">Continue</button>
-            `);
-            $(".message_close").click(async function(){
-                $(".message_in").fadeOut(function(){
-                    $(".message").hide(function(){
-                        loadAllInventory(psize,pnum);
-                        $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
-                    });
-                });
-            });
-        });
-    });
-  } 
-  $("#inventoryname_input").val("");
-  $("#inventorytype_input").val("");
-  $("#inventoryquantity_input").val("");
-  $("#inventoryunit_input").val("");
-  $("#inventoryfunction_input").val("");
+      }
+      $("#inventoryname_input").val("");
+      $("#inventorytype_input").val("");
+      $("#inventoryquantity_input").val("");
+      $("#inventoryunit_input").val("");
+      $("#inventoryfunction_input").val("");
+    });    
+  });
 }
 
 
 
  
 async function editinventory(id,name,functio,type,quantit,unit){
-  $(".message_in").html('');
-  $(".message_in").css({"marginTop":"50px","width":"80%","marginLeft":"10%"});
-  $(".message_in").html(`<div id="subloader"></div>`);
-  $("#subloader").fadeOut()
+  $(".modal-dialog").addClass("modal-xl");  
   $(window).scrollTop(0);
-  $(".message").show(function(){
-     $(".message_in").fadeIn(function(){
-         $(".message_in").html(`
-             <div class="message_div" style="padding-left:1%;max-height:450px;">
-                <form id="update_inventory_form" autocomplete="on" method="post">
-                
-                  <label class="set_appointment_label" for="inventoryid">Item Id:</label><br/>
-                  <input type="text" class="set_appointment_input" id="uinventoryid_input" name="inventoryid" placeholder="Item Id" value="`+id+`" disabled required><br/><br/>
+  $(".modal-header").html(`<h2>Inventory</h2>`);
 
-                  <label class="set_appointment_label" for="inventoryname">Item Name:</label><br/>
-                  <input type="text" class="set_appointment_input" id="uinventoryname_input" name="inventoryname" placeholder="Name of Item" value="`+name+`" required><br/><br/>
-  
-                  <label class="set_appointment_label" for="inventorytype">Item Type:</label><br/>
-                  <input type="text" class="set_appointment_input" id="uinventorytype_input" name="inventorytype" placeholder="Type of Item" value="`+type+`" list="inventorytype" required><br/><br/>
-                  <datalist id="inventorytype">
-                    <option value="Drug">
-                    <option value="Equipment">
-                    <option value="Facility">
-                  </datalist>
-  
-                  <label class="set_appointment_label" for="inventoryquantity">Quantity:</label><br/>
-                  <input type="number" class="set_appointment_inputq" id="uinventoryquantity_input" name="inventoryquantity" placeholder="Quantity" value="`+quantit+`" required> <input type="text" class="set_appointment_inputq" id="uinventoryunit_input" name="inventoryquantity" placeholder="Unit" value="`+unit+`"><br/><br/>
-  
-  
-                  <label class="set_appointment_label" for="inventoryfunction">Function:</label><br/>
-                  <textarea class="set_appointment_input" id="uinventoryfunction_input" name="inventoryfunction" placeholder="What is the function of this item" required>`+functio+`</textarea><br/><br/>
-             
-                  <input id="message_continue" class="message_continue" style="position:absolute;top:0px;margin-top:462px;margin-left:59%" type="submit" value="Update"/>
-                </form>
-             </div>
-             <button class="message_close">Close</button>
-         `);
-         $(".message_close").click(async function(){
-          $(".message_in").fadeOut(function(){
-              $(".message").hide();
-              $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
+  $(".modal-body").html(`
+    <div>
+      <div class="spinner-border spinner-border-xl text-info" style="margin-left:49%"></div>
+    </div>
+  `);
+  document.getElementById("showModal").click();
+
+  $(".spinner-border").fadeOut(1500,function(){
+    $(".modal-body").html(`
+        <div class="message_div">
+            <form id="update_inventory_form" autocomplete="on" method="post">
+    
+            <label class="set_appointment_label" for="inventoryid">Item Id:</label><br/>
+            <input type="text" class="set_appointment_input" id="uinventoryid_input" name="inventoryid" placeholder="Item Id" value="`+id+`" disabled required><br/><br/>
+
+            <label class="set_appointment_label" for="inventoryname">Item Name:</label><br/>
+            <input type="text" class="set_appointment_input" id="uinventoryname_input" name="inventoryname" placeholder="Name of Item" value="`+name+`" required><br/><br/>
+
+            <label class="set_appointment_label" for="inventorytype">Item Type:</label><br/>
+            <input type="text" class="set_appointment_input" id="uinventorytype_input" name="inventorytype" placeholder="Type of Item" value="`+type+`" list="inventorytype" required><br/><br/>
+            <datalist id="inventorytype">
+              <option value="Drug">
+              <option value="Equipment">
+              <option value="Facility">
+            </datalist>
+
+            <label class="set_appointment_label" for="inventoryquantity">Quantity:</label><br/>
+            <input type="number" class="set_appointment_inputq" id="uinventoryquantity_input" name="inventoryquantity" placeholder="Quantity" value="`+quantit+`" required> <input type="text" class="set_appointment_inputq" id="uinventoryunit_input" name="inventoryquantity" placeholder="Unit" value="`+unit+`"><br/><br/>
+
+
+            <label class="set_appointment_label" for="inventoryfunction">Function:</label><br/>
+            <textarea class="set_appointment_input" id="uinventoryfunction_input" name="inventoryfunction" placeholder="What is the function of this item" required>`+functio+`</textarea><br/><br/>
+ 
+            <input id="message_continue" class="btn btn-block btn-success" type="submit" value="Update"/><br/>
+          </form>
+        </div>
+    `);
+  $("#update_inventory_form").submit(async function(e){
+    e.preventDefault();
+    uname=$("#uinventoryname_input").val();
+    utype=$("#uinventorytype_input").val();
+    uquantity=$("#uinventoryquantity_input").val();
+    uunit=$("#uinventoryunit_input").val();
+    ufunctio=$("#uinventoryfunction_input").val();
+    $(".modal-body").html(`
+      <div>
+        <div class="spinner-border spinner-border-xl text-info" style="margin-left:49%"></div>
+      </div>
+  `);
+    $(".modal-dialog").removeClass("modal-xl");  
+    data= await updateInventory(id,uname,ufunctio,utype,uquantity,uunit);
+    $(data).ready(function(){
+      $(".spinner-border").fadeOut(function(){
+        if(data["error"]==true){
+          $(".modal-body").html(`
+            <p>
+            `+data["message"]+`
+            </p>
+          `);
+          $(".modal-footer").html(`
+           <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+          `);
+        }
+        else if(data["error"]==false){
+          $(".modal-body").html(`
+            <h2>Upload Successful!</h2>
+          `);
+          $(".modal-footer").html(`
+           <button type="button" class="btn btn-block btn-success closee" data-dismiss="modal">Continue</button>
+          `);
+          $(".closee").click(function(){
+            loadAllInventory(psize,pnum);
           });
-          });
-          
-          $("#update_inventory_form").submit(async function(e){
-            e.preventDefault();
-            uname=$("#uinventoryname_input").val();
-            utype=$("#uinventorytype_input").val();
-            uquantity=$("#uinventoryquantity_input").val();
-            uunit=$("#uinventoryunit_input").val();
-            ufunctio=$("#uinventoryfunction_input").val();
-            console.log(uname);
-            console.log(utype);
-            console.log(uquantity);
-            console.log(uunit);
-            console.log(ufunctio);
-            data= await updateInventory(id,uname,ufunctio,utype,uquantity,uunit);
-            if(data["error"]==true){
-              $(window).scrollTop(0);
-              $(".message").show(function(){
-                $(".message_in").fadeIn(function(){
-                  $(".message_in").html(`
-                    <p class="message_text">
-                      `+data["message"]+`
-                    </p>
-                    <button class="message_close">Try Again</button>
-                  `);
-                  $(".message_close").click(async function(){
-                    $(".message_in").fadeOut(function(){
-                      $(".message").hide();
-                      $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
-                    });
-                  });
-                });
-              });
-            }
-            else if(data["error"]==false){
-              $(window).scrollTop(0);
-              $(".message").show(function(){
-                $(".message_in").fadeIn(function(){
-                  $(".message_in").html(`
-                    <p class="message_text" style="margin-left:35%;">
-                      Upload Successful!!
-                    </p>
-                    <button class="message_close">Continue</button>
-                  `);
-                  $(".message_close").click(async function(){
-                    $(".message_in").fadeOut(function(){
-                      $(".message").hide(function(){
-                        loadAllInventory(psize,pnum);
-                        $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
-                      });
-                    });
-                  });
-                });
-              });
-            } 
-          });
-          
-        }); 
-         
+        }
       });
+    });
+
+  });
+});
+$(".modal-footer").html(`
+  <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+`);
+
 }
 
 async function minusquantity(id,name,functio,type,quantit,unit,pageNum){

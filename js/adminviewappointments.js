@@ -989,77 +989,83 @@ $(document).ready(function(){
   }
   
 async function appointmentRecord(id,pid){
+  $(".modal-dialog").addClass("modal-xl");  
   $(window).scrollTop(0);
-  $(".message_in").css({"marginTop":"20px","width":"80%","marginLeft":"10%"});
-  $(".message_in").html(`<div id="subloader"></div>`);
-  $(".message").show(function(){
-    $(".message_in").fadeIn(function(){
-        $(".message_close").click(async function(){
-            $(".message_in").fadeOut(function(){
-                $(".message").hide();
-                $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
-            });
-        });
-    });
-  });
+  $(".modal-header").html(`<h2>Appointment Record</h2>`);
+
+  $(".modal-body").html(`
+    <div>
+      <div class="spinner-border spinner-border-xl text-info" style="margin-left:49%"></div>
+    </div>
+  `);
+  document.getElementById("showModal").click();
+
   data=await getPatientRecordByAppointment(id);
-  if(data.error==false){
-    $("#subloader").fadeOut(function(){
-      $(".message_in").html(`
-      <div class="viewrecords_tab box_shadow">
-       <button class="viewrecords_tablinks active" onclick="openRecordTab(event, 'ViewRecords')">&nbsp;View Records&nbsp;</button>
-        <button class="viewrecords_tablinks" onclick="openRecordTab(event, 'AddRecords')">Add Record</button>
-      </div>
-      <div id="ViewRecords" class="viewrecords_tabcontent box_shadow scroll_div" style="display:block;">
-          <div class="subloader"></div>
-      </div>
-      <div id="AddRecords" class="viewrecords_tabcontent box_shadow scroll_div">
 
-        <div class="successful force box_shadow"></div>  
-      
-        <form autocomplete="on" id="add_record_form" method="post">
+  $(data).ready(function(){
+    $(".spinner-border").fadeOut(function(){
+      if(data.error==false){
+        $(".modal-body").html(`
+         
+          <div class="viewrecords_tab box_shadow">   
+            <button class="viewrecords_tablinks active" id="view_record" onclick="openRecordTab(event, 'ViewRecords')">&nbsp;View Records&nbsp;</button>
+            <button class="viewrecords_tablinks" onclick="openRecordTab(event, 'AddRecords')">Add Record</button>
+          </div>
 
-          <label class="set_appointment_label" for="patientId">Patient Id:</label><br/>
-          <input style="text-transform:capitalize" type="text" maxlength=7 class="set_appointment_input" name="patientId" id="recordUserId_input" placeholder="MatricNo/Staff No of patient" value="`+pid+`" disabled required><br/><br/>
-
-          <label class="set_appointment_label" for="diagnosis">Diagnosis</label><br/>
-          <input type="text" class="set_appointment_input" name="diagnosis" id="recorddiagnosis_input" placeholder="Diagnosis" required><br/><br/>
-        
+          <div id="ViewRecords" class="viewrecords_tabcontent box_shadow scroll_div" style="display:block;">
+           <div class="subloader"></div>
+          </div>
           
-          <label class="set_appointment_label" for="notes">Notes:</label><br/>
-          <textarea class="set_appointment_input" id="recordnotes_input" name="notes" placeholder="Notes" required></textarea><br/><br/>
-
-          <input class="set_appointment_submit" type="submit" value="Add Record"/>
-        </form>
-      </div>
-      <button class="message_close">Close</button>
-    `);
-    if(sessionStorage.getItem("darkmode")=="on"){
-     $(".force").css({
-      "background-color":"rgb(53, 54, 58)",
-      "color":"white"
-      });
-  }
-
-    loadRecord(data,pid);
-    $("#add_record_form").submit(function(e){
-      e.preventDefault();
-      diagnosis=$("#recorddiagnosis_input").val();
-      notes=$("#recordnotes_input").val()
-      addRecords(id,pid,diagnosis,notes);
+          <div id="AddRecords" class="viewrecords_tabcontent box_shadow scroll_div">
+ 
+            <div class="successful force box_shadow"></div>  
+       
+            <form autocomplete="on" id="add_record_form" method="post">
+        
+           <label class="set_appointment_label" for="patientId">Patient Id:</label><br/>
+           <input style="text-transform:capitalize" type="text" maxlength=7 class="set_appointment_input" name="patientId" id="recordUserId_input" placeholder="MatricNo/Staff No of patient" value="`+pid+`" disabled required><br/><br/>
+ 
+           <label class="set_appointment_label" for="diagnosis">Diagnosis</label><br/>
+           <input type="text" class="set_appointment_input" name="diagnosis" id="recorddiagnosis_input" placeholder="Diagnosis" required><br/><br/>
+         
+           
+           <label class="set_appointment_label" for="notes">Notes:</label><br/>
+           <textarea class="set_appointment_input" id="recordnotes_input" name="notes" placeholder="Notes" required></textarea><br/><br/>
+ 
+           <input class="set_appointment_submit" type="submit" value="Add Record"/>
+         </form>
+       </div>
+        `);
+        $(".modal-footer").html(`
+          <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+       `);
+       if(sessionStorage.getItem("darkmode")=="on"){
+        $(".force").css({
+         "background-color":"rgb(53, 54, 58)",
+         "color":"white"
+         });
+        }
+        loadRecord(data,pid);
+        $("#add_record_form").submit(function(e){
+          e.preventDefault();
+          diagnosis=$("#recorddiagnosis_input").val();
+          notes=$("#recordnotes_input").val()
+          addRecords(id,pid,diagnosis,notes);
+        });
+      }
+      else{
+        $(".modal-dialog").removeClass("modal-xl");  
+        $(".modal-body").html(`
+          <p>
+            `+data.message+`
+          </p>
+        `);
+        $(".modal-footer").html(`
+          <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+        `);
+      }
     });
   });
-  }
-  else{
-    $("#subloader").fadeOut(function(){
-      $(".message_in").html(`
-      <p class="message_text">
-        `+data.message+`
-      </p>
-      <button class="message_close">Continue</button>
-    `);
-    });
-  }
 }
 
 
@@ -1112,115 +1118,140 @@ async function loadRecord(data,pid){
 }
 
 async function addRecords(id,pid,diagnosis,notes){
-  $(".successful").html(`<div class="ss" id="subloader"></div>`);
+  $(".successful").html(`
+    <div class="ss" id="subloader"></div>
+  `);
+
   data = await addPatientRecord(id,pid,notes,diagnosis);
+
   $(".successful").show();
   if(data.error==true){
-    $(".ss").fadeOut(function(){
+    $("#subloader").fadeOut(function(){
       $(".successful").css({"color":"red"});
-      $(".successful").html(`An Error Occured!`);
-      setTimeout(ccloseSuccess(id,pid),5000);
+      $(".successful").html(`
+        An Error Occured!<br/>
+        <button class="btn btn-block btn-danger cclosee">Close</button>  
+      `);
+      $(".cclosee").click(function(){
+        $(".successful").hide();
+        document.getElementById("view_record").click();
+      });
     });
   }
   else{
-    $(".ss").fadeOut(function(){
-      
+    $("#subloader").fadeOut(async function(){
       $(".successful").css({"color":"green"});
-      $(".successful").html(`Successful!`);
-      setTimeout(ccloseSuccess(id,pid),2000);
+      $(".successful").html(`
+        Successful!
+        <button class="btn btn-block btn-success cclosee">Continue</button>
+      `);
+      $(".cclosee").click(function(){
+        $(".successful").hide();
+        document.getElementById("view_record").click();
+      });
+
+      data=await getPatientRecordByAppointment(id);
+
+      $(data).ready(function(){
+        loadRecord(data,pid);
+      });
+  
     });
   }
   $("#recorddiagnosis_input").val("");
   $("#recordnotes_input").val("")
 }
 
-function ccloseSuccess(id,pid){
-  $(".successful").hide(function(){
-    setTimeout(appointmentRecord(id,pid),3000);
-  });
-}
 
 async function appointmentDrugs(id,pid){
+  $(".modal-dialog").addClass("modal-xl");  
   $(window).scrollTop(0);
-  $(".message_in").css({"marginTop":"20px","width":"80%","marginLeft":"10%"});
-  $(".message_in").html(`<div id="subloader"></div>`);
-  $(".message").show(function(){
-    $(".message_in").fadeIn(function(){
-        $(".message_close").click(async function(){
-            $(".message_in").fadeOut(function(){
-                $(".message").hide();
-                $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
-            });
-        });
-    });
-  });
+  $(".modal-header").html(`<h2>Appointment Drug</h2>`);
+
+  $(".modal-body").html(`
+    <div>
+      <div class="spinner-border spinner-border-xl text-info" style="margin-left:49%"></div>
+    </div>
+  `);
+  document.getElementById("showModal").click();
+
   data=await getPatientDrug(id);
-  if(data.error==false){
-    $("#subloader").fadeOut(async function(){
-      $(".message_in").html(`
-      <div class="viewrecords_tab box_shadow">
-       <button class="viewrecords_tablinks active" onclick="openRecordTab(event, 'ViewDrugs')">&nbsp;View Drugs&nbsp;</button>
-        <button class="viewrecords_tablinks" onclick="openRecordTab(event, 'AddDrugs')">Add Drug</button>
-      </div>
-      <div id="ViewDrugs" class="viewrecords_tabcontent box_shadow scroll_div" style="display:block;">
-          <div class="subloader"></div>
-      </div>
-      <div id="AddDrugs" class="viewrecords_tabcontent box_shadow scroll_div">
 
-        <div class="successful force box_shadow"></div>  
-      
-        <form autocomplete="on" id="add_drug_form" method="post">
+  $(data).ready(function(){
+    $(".spinner-border").fadeOut(async function(){
+      if(data.error==false){
+        $(".modal-body").html(`
+        <div class="viewrecords_tab box_shadow">
+        <button class="viewrecords_tablinks active" id="view_drug" onclick="openRecordTab(event, 'ViewDrugs')">&nbsp;View Drugs&nbsp;</button>
+         <button class="viewrecords_tablinks" onclick="openRecordTab(event, 'AddDrugs')">Add Drug</button>
+       </div>
+       <div id="ViewDrugs" class="viewrecords_tabcontent box_shadow scroll_div" style="display:block;">
+           <div class="subloader"></div>
+       </div>
+       <div id="AddDrugs" class="viewrecords_tabcontent box_shadow scroll_div">
+ 
+         <div class="successful force box_shadow"></div>  
+       
+         <form autocomplete="on" id="add_drug_form" method="post">
+ 
+           <label class="set_appointment_label" for="patientdrug">Drug Name:</label><br/>
+           <select style="text-transform:capitalize" type="text" class="set_appointment_input" name="drugId" id="drug_input" placeholder="Select a Drug" required>
+           
+           </select><br/><br/>  
+           
+           <label class="set_appointment_label" for="notes">Instructions:</label><br/>
+           <textarea class="set_appointment_input" id="instructions_input" name="notes" placeholder="Instructions on drug usage" required></textarea><br/><br/>
+ 
+           <input class="set_appointment_submit" type="submit" value="Add Drug"/>
+         </form>
+       </div>
+        `);
+        $(".modal-footer").html(`
+          <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+        `);
+        drugoptionlen=await getInventoryByType(1,1,"drug");
+        drugoption=await getInventoryByType(1,drugoptionlen.length,"drug");
 
-          <label class="set_appointment_label" for="patientdrug">Drug Name:</label><br/>
-          <select style="text-transform:capitalize" type="text" class="set_appointment_input" name="drugId" id="drug_input" placeholder="Select a Drug" required>
-          
-          </select><br/><br/>  
-          
-          <label class="set_appointment_label" for="notes">Instructions:</label><br/>
-          <textarea class="set_appointment_input" id="instructions_input" name="notes" placeholder="Instructions on drug usage" required></textarea><br/><br/>
-
-          <input class="set_appointment_submit" type="submit" value="Add Drug"/>
-        </form>
-      </div>
-      <button class="message_close">Close</button>
-    `);
-    drugoptionlen=await getInventoryByType(1,1,"drug");
-    drugoption=await getInventoryByType(1,drugoptionlen.length,"drug");
-    if(drugoption.error==false){
-      if(drugoption.length>0){
-        for(j=0;j<drugoption.data.length;j++){
-          $("#drug_input").append(`
-            <option value="`+drugoption.data[j].id+`">`+drugoption.data[j].name+`</option>
-          `);
+        if(drugoption.error==false){
+          if(drugoption.length>0){
+            for(j=0;j<drugoption.data.length;j++){
+              $("#drug_input").append(`
+                <option value="`+drugoption.data[j].id+`">`+drugoption.data[j].name+`</option>
+              `);
+            }
+          }
         }
-      }
-    }
-    if(sessionStorage.getItem("darkmode")=="on"){
-     $(".force").css({
-      "background-color":"rgb(53, 54, 58)",
-      "color":"white"
-      });
-  }
 
-    loadDrugs(data,pid);
-    $("#add_drug_form").submit(function(e){
-      e.preventDefault();
-      drug=$("#drug_input").val();
-      instructions=$("#instructions_input").val()
-      addDrugs(id,drug,pid,instructions);
+        if(sessionStorage.getItem("darkmode")=="on"){
+          $(".force").css({
+           "background-color":"rgb(53, 54, 58)",
+           "color":"white"
+           });
+        }
+
+        loadDrugs(data,pid);
+
+        $("#add_drug_form").submit(function(e){
+          e.preventDefault();
+          drug=$("#drug_input").val();
+          instructions=$("#instructions_input").val()
+          addDrugs(id,drug,pid,instructions);
+        });
+
+      } 
+      else{
+        $(".modal-dialog").removeClass("modal-xl");  
+        $(".modal-body").html(`
+          <p>
+            `+data.message+`
+          </p>
+        `);
+        $(".modal-footer").html(`
+          <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+        `);
+      }   
     });
   });
-  }
-  else{
-    $("#subloader").fadeOut(function(){
-      $(".message_in").html(`
-      <p class="message_text">
-        `+data.message+`
-      </p>
-      <button class="message_close">Continue</button>
-    `);
-    });
-  }
 }
 
 async function loadDrugs(data,pid){
@@ -1269,141 +1300,140 @@ async function loadDrugs(data,pid){
 
 async function addDrugs(id,did,pid,instructions){
   $(".successful").html(`<div class="ss" id="subloader"></div>`);
+
   data = await addPatientDrug(id,did,pid,instructions);
+
   $(".successful").show();
   if(data.error==true){
     $(".ss").fadeOut(function(){
       $(".successful").css({"color":"red"});
-      $(".successful").html(`An Error Occured!`);
-      setTimeout(cccloseSuccess(id,pid),5000);
+      $(".successful").html(`
+        An Error Occured!
+        <button class="btn btn-block btn-danger cclosee">Close</button>
+      `);
+      $(".cclosee").click(function(){
+        $(".successful").hide();
+        document.getElementById("view_drug").click();
+      });
     });
   }
   else{
-    $(".ss").fadeOut(function(){
+    $(".ss").fadeOut(async function(){
       
       $(".successful").css({"color":"green"});
-      $(".successful").html(`Successful!`);
-      setTimeout(cccloseSuccess(id,pid),2000);
+      $(".successful").html(`
+        Successful!
+        <button class="btn btn-block btn-success cclosee">Continue</button>
+      `);
+      $(".cclosee").click(function(){
+        $(".successful").hide();
+        document.getElementById("view_drug").click();
+      });
+
+      data=await getPatientDrug(id);
+
+      $(data).ready(function(){
+        loadDrugs(data,pid);
+      });
     });
   }
   $("#recorddiagnosis_input").val("");
   $("#recordnotes_input").val("")
 }
 
-function cccloseSuccess(id,pid){
-  $(".successful").hide(function(){
-    setTimeout(appointmentDrugs(id,pid),3000);
-  });
-}
+
 
 async function appointmentStatus(id,status){
-  $(".message_in").html(`<div id="subloader"></div>`);
+
+  $(".modal-dialog").removeClass("modal-xl");  
+  $(window).scrollTop(0);
+  $(".modal-header").html(`<h2>Appointment Status</h2>`);
+
+  $(".modal-body").html(`
+    <div>
+      <div class="spinner-border spinner-border-xl text-info" style="margin-left:49%"></div>
+    </div>
+  `);
+  document.getElementById("showModal").click();
+
   data= await setAppointmentStatus(id,status.toLowerCase());
-  if(data["error"]==true){
-    $(window).scrollTop(0);
-    $(".message").show(function(){
-        $(".message_in").fadeIn(function(){
-          $("#subloader").fadeOut(function(){
-            $(".message_in").html(`
-            <p class="message_text">
-                `+data["message"]+`
-            </p>
-            <button class="message_close">Try Again</button>
+
+  $(data).ready(function(){
+    $(".spinner-border").fadeOut(function(){
+      if(data.error==true){
+        $(".modal-body").html(`
+          <p class="message_text">
+           `+data["message"]+`
+          </p>
         `);
-         $(".message_close").click(async function(){
-            $(".message_in").fadeOut(function(){
-                $(".message").hide();
-                $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
-            });
-        });
-          });
-           
-        });
-    });
-  }
-  else if(data["error"]==false){
-    $(window).scrollTop(0);
-    $(".message").show(function(){
-        $(".message_in").fadeIn(function(){
-          $("#subloader").fadeOut(function(){
-            $(".message_in").html(`
-            <p class="message_text" style="margin-left:40%;">
-                Successful!!
-            </p>
-            <button class="message_close">Continue</button>
+        $(".modal-footer").html(`
+          <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
         `);
-        $(".message_close").click(async function(){
-            $(".message_in").fadeOut(function(){
-                $(".message").hide(function(){
-                  loadTodayAppointments();
-                  loadUpcomingAppointments(1,7);
-                  loadStatus();
-                  document.getElementById("appointment_search").click(); 
-                    $(".message_in").css({"marginTop":"200px","width":"50%","marginLeft":"30%"});
-                });
-            });
+      }
+      else{
+        $(".modal-body").html(`
+        <h2 class="text-successful">
+          Successful!!
+        </h2>
+       `);
+       $(".modal-footer").html(`
+         <button type="button" class="btn btn-block btn-success closee" data-dismiss="modal">Close</button>
+        `);
+        $(".closee").click(function(){
+          loadTodayAppointments();
+          loadUpcomingAppointments(1,7);
+          loadStatus();
+          document.getElementById("appointment_search").click(); 
         });
-          });
-        });
+      }    
     });
-  }
- 
+  }); 
 }
 
   async function submitAppointment(){
+
+    $(".modal-dialog").removeClass("modal-xl");  
+    $(window).scrollTop(0);
+    $(".modal-header").html(`<h2>Appointment Status</h2>`);
+  
+    $(".modal-body").html(`
+      <div>
+        <div class="spinner-border spinner-border-xl text-info" style="margin-left:49%"></div>
+      </div>
+    `);
+    document.getElementById("showModal").click();
+
     var id=$("#id_input").val();
     var reason=$("#reason_input").val();
     var date=$("#date_input").val();
     var time=changeTime($("#time_input").val());
   
     var res= await setAppointment(id,reason,date,time);
-    if(res.error==true){
-      $(window).scrollTop(0);
-      $(".message").show(function(){
-         $(".message_in").fadeIn(function(){
-             $(".message_in").html(`
-                <p class="message_text">
-                  Couldnt Set Appointment! Contact your admin
-                </p>
-                 <button class="message_close">Close</button>
-             `);
-             $(".message_close").click(async function(){
-                 $(".message_in").fadeOut(function(){
-                    $("#id_input").val("");
-                    $("#reason_input").val("");
-                    $("#date_input").val("");
-                    $("#time_input").val("");
-                     $(".message").hide();
-                 });
-             });
-         });
-     });
-    }
-    else{
-      $(window).scrollTop(0);
-      $(".message").show(function(){
-         $(".message_in").fadeIn(function(){
-             $(".message_in").html(`
-                <p class="message_text">
-                  Appointment has been set!
-                </p>
-                 <button class="message_close">Close</button>
-             `);
-             $(".message_close").click(async function(){
-                 $(".message_in").fadeOut(function(){
-                    $("#id_input").val("");
-                    $("#reason_input").val("");
-                    $("#date_input").val("");
-                    $("#time_input").val("");
-                    loadTodayAppointments();
-                    loadUpcomingAppointments();
-                    loadStatus();
-                     $(".message").hide();
-                 });
-             });
-         });
-     });
-    }
+
+    $(res).ready(function(){
+      $(".spinner-border").fadeOut(function(){
+        if(res.error==true){
+          $(".modal-body").html(`
+            <p>
+              Couldnt Set Appointment! Contact your admin
+            </p>
+          `);
+          $(".modal-footer").html(`
+            <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+          `);
+        }
+        else{
+          $(".modal-body").html(`
+          <h2 class="text-successful">
+            Appointment has been set!
+          </h2>
+         `);
+         $(".modal-footer").html(`
+           <button type="button" class="btn btn-block btn-success" data-dismiss="modal">Close</button>
+          `);
+        }    
+      });
+    });
   }
   
   function changeTime(time){

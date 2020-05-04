@@ -15,7 +15,7 @@ $(document).ready(function(){
             "color":"black"
             });
 
-            $("#head").html(`<a href="../home"><img src="../assets/NAME.png"/></a>`);
+            $("#head").html(`<a href="../home"><img src="../assets/Name.png"/></a>`);
        }
        else{
            sessionStorage.setItem("darkmode","on");
