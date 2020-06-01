@@ -61,7 +61,7 @@
             <p>
               As hard as it may seem, Coffee is actually very healthy<br/><br/>
               It’s high in antioxidants, and studies have linked coffee intake to longevity and a reduced risk of type 2 diabetes, Parkinson’s and Alzheimer’s diseases, and numerous other illnesses <br/><br/>
-              So not incorporate coffee into your routine 😀 and be careful not to go overboard!
+              So why not incorporate coffee into your routine 😀 and be careful not to go overboard!
             </p>
             <footer class="blockquote-footer text-dark">From <a class="text-dark flink" href="https://www.healthline.com/nutrition/27-health-and-nutrition-tips#section4">healthline.com</a></footer>
           </blockquote>        
