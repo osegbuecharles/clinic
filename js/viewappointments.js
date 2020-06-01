@@ -505,7 +505,7 @@ async function submitAppointment(){
     $(".spinner-border").fadeOut(function(){
       $(".modal-body").html(`
         <p class="container">
-          `+res.message+`
+          Couldnt Set Appointment! Contact your admin
         </p>
       `);
     });

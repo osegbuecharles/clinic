@@ -3,7 +3,7 @@
 <script src="../js/nav.js"></script>
 <!--<body>
     <div id="head">
-        <a href="../home"><img src="../assets/NAME.png"/></a>
+        <a href="../home"><img src="../assets/Name.png"/></a>
     </div>
     <div id="navbar">
         <a id="home" href="../home">Home</a>

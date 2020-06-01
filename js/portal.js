@@ -89,7 +89,12 @@ async function login(username,password){
             $(".message_close").click(async function(){
                 window.location.replace("../portal");
             });
+            setInterval(refresh,1000);
         }
+}
+
+function refresh(){
+    window.location.replace("../portal");
 }
 
 async function signup(matricno,password,lastName,firstName,email,dob,phone,address,gender){ 

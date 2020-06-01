@@ -48,7 +48,7 @@ function getPatientRecord(id){
   });
 }
 
-function addPatientRecord(id,notes,diagnosis){
+function adddPatientRecord(id,notes,diagnosis){
   param={
     matricNo:sessionStorage.getItem("username"),
     password:sessionStorage.getItem("password"),
@@ -270,7 +270,7 @@ function viewdp(dp){
 
 async function viewpatient(id){
   $(window).scrollTop(0);
-  $(".modal-header").html(`<h2>Profile Picture</h2>`);
+  $(".modal-header").html(`<h2>Patient Record</h2>`);
 
   $(".modal-body").html(`
     <div>
@@ -288,7 +288,7 @@ async function viewpatient(id){
     $(".spinner-border").fadeOut(function(){
       $(".modal-body").html(`
       <div class="viewrecords_tab box_shadow">
-       <button class="viewrecords_tablinks active" onclick="openRecordTab(event, 'ViewRecords')">&nbsp;View Records&nbsp;</button>
+       <button class="viewrecords_tablinks active" id="view_recordnull" onclick="openRecordTab(event, 'ViewRecords')">&nbsp;View Records&nbsp;</button>
         <button class="viewrecords_tablinks" onclick="openRecordTab(event, 'AddRecords')">Add Record</button>
       </div>
       <div id="ViewRecords" class="viewrecords_tabcontent box_shadow scroll_div" style="display:block;">
@@ -319,7 +319,7 @@ async function viewpatient(id){
       "background-color":"rgb(53, 54, 58)",
       "color":"white"
       });
-  }
+    }
   $(".modal-footer").html(`
     <button type="button" class="btn btn-block btn-danger closee" data-dismiss="modal">Close</button>
   `);
@@ -328,6 +328,7 @@ async function viewpatient(id){
   });
 
     loadRecords(data);
+
     $("#add_record_form").submit(function(e){
       e.preventDefault();
       diagnosis=$("#recorddiagnosis_input").val();
@@ -408,21 +409,40 @@ async function loadRecords(data){
 
 async function addRecord(id,diagnosis,notes){
   $(".successful").html(`<div class="ss" id="subloader"></div>`);
-  data = await addPatientRecord(id,notes,diagnosis);
+  var datta =await adddPatientRecord(id,notes,diagnosis);
+  
   $(".successful").show();
-  if(data.error==true){
+
+  if(datta.error==true){
     $(".ss").fadeOut(function(){
       $(".successful").css({"color":"red"});
-      $(".successful").html(`An Error Occured!`);
-      setTimeout(closeSuccess(id),5000);
+      $(".successful").html(`
+      An Error Occured!
+      <button class="btn btn-block btn-danger cclosee">Close</button>
+      `);
+      $(".cclosee").click(function(){
+        $(".successful").hide();
+        document.getElementById("view_recordnull").click();
+      });
     });
   }
   else{
-    $(".ss").fadeOut(function(){
+    $(".ss").fadeOut(async function(){
       
       $(".successful").css({"color":"green"});
-      $(".successful").html(`Successful!`);
-      setTimeout(closeSuccess(id),2000);
+      $(".successful").html(`
+      Successful!
+      <button class="btn btn-block btn-success cclosee">Continue</button>
+    `);
+    $(".cclosee").click(function(){
+      $(".successful").hide();
+      document.getElementById("view_recordnull").click();
+    });
+    data=await getPatientRecord(id);
+
+    $(data).ready(function(){
+      loadRecords(data);
+    });
     });
   }
   $("#recorddiagnosis_input").val("");

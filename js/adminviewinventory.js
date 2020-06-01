@@ -323,7 +323,7 @@ async function loadSearch(pageNum,pageSize){
             <td><span class="clickable controllers" onclick="sminusquantity('`+data2.data[i].id+"','"+data2.data[i].name+"','"+data2.data[i].function+"','"+data2.data[i].type+"','"+data2.data[i].quantity+"','"+data2.data[i].unit+"','"+pageNum+`')">&minus;</span>`+data2.data[i].quantity+`<span class="clickable controllers" onclick="splusquantity('`+data2.data[i].id+"','"+data2.data[i].name+"','"+data2.data[i].function+"','"+data2.data[i].type+"','"+data2.data[i].quantity+"','"+data2.data[i].unit+"','"+pageNum+`')">&plus;</span></td>
             <td>`+data2.data[i].unit+`</td>
             <td>`+data2.data[i].function+`</td>
-            <td class="clickable" onclick="editinventory('`+data2.data[i].id+`')">Edit Inventory</td>
+            <td class="clickable" onclick="editinventory('`+data2.data[i].id+"','"+data2.data[i].name+"','"+data2.data[i].function+"','"+data2.data[i].type+"','"+data2.data[i].quantity+"','"+data2.data[i].unit+`')">Edit Inventory</td>
           </tr>
         `);  
         }

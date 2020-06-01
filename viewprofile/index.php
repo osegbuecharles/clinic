@@ -1,4 +1,15 @@
 <?php
+require '../cloudinary/Cloudinary.php';
+require '../cloudinary/Uploader.php';
+require '../cloudinary/Helpers.php';
+require '../cloudinary/Api.php';
+
+\Cloudinary::config(array(
+    "cloud_name" => "dqmatcjjd",
+    "api_key" => "283948446355636",
+    "api_secret" => "mowPmWz6Wp62n7Im46r1akieNK0"
+));
+
     include_once "../crud/connect.php";
     if(isset($_POST["matricNo"]) && !empty($_FILES["displaypicture"])){
         $matricNo=$_POST["matricNo"];
@@ -34,6 +45,9 @@
                         $query= "UPDATE userdetails SET displaypicture='$dp' WHERE matricNo='$matricNo'";
                         if (mysqli_query($link, $query)){
                             //Upload file
+                            //\Cloudinary\Uploader::upload($target_file, array("public_id" => "03"));
+                            
+                            
                             move_uploaded_file($_FILES['displaypicture']['tmp_name'],$target_dir.$dp);
                         }
                         else{
