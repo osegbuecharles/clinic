@@ -118,11 +118,7 @@
      
       </div>
 
-      <div class="card bg-white text-dark border border-success my-3">
-        <div class="card-body py-2" style="text-align: center;">
-          <h4><a class="text-success" href="../healthtips/">See more>></a></h4>
-        </div>
-      </div>
+      <h4><a class="btn btn-outline-success btn-block my-3" href="../healthtips/">See more>></a></h4>
 
     
 
