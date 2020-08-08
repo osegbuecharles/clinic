@@ -36,7 +36,7 @@
                                 echo json_encode(array("error"=>FALSE,"data"=>array("success"=>TRUE)));
                             }
                             else{
-                                echo json_encode(msqli_error($link));
+                                echo json_encode(array("error"=>TRUE,"message"=>msqli_error($link)));
                             }
                         }
                         else{
