@@ -184,7 +184,7 @@ async function loadInventory(pageNum,pageSize){
        if(data["data"].length>0){
          for(i=0;i<data["data"].length;i++){
            $("#viewinventorybody").append(`
-           <tr id="allinventorycontent" class=content>
+           <tr id="allinventorycontent" class="content force">
              <td>`+data.data[i].id+`</td>
              <td>`+data.data[i].name+`</td>
              <td>`+data.data[i].type+`</td>

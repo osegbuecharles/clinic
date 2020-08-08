@@ -285,7 +285,7 @@ async function completeDrugs(id){
 
     $(".spinner-border").fadeOut(function(){
         $(".modal-body").html(`
-            <div class="container">
+            <div class="container text-dark">
                 Are you sure you have completed this drug?
             </div>
         `);
